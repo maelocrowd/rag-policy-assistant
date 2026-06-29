@@ -1,112 +1,257 @@
-import os
-import glob
+# ingestion.py
+
 from pathlib import Path
-from dotenv import load_dotenv
+import uuid
 
-# Import LangChain utilities
-from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
+from langchain_text_splitters import (
+    MarkdownHeaderTextSplitter,
+    RecursiveCharacterTextSplitter,
+)
 from langchain_chroma import Chroma
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_core.documents import Document
+from langchain_community.document_loaders import (
+    TextLoader,
+    PyPDFLoader,
+    UnstructuredHTMLLoader,
+)
+from utils import (
+    CORPUS_DIR,
+    CHROMA_DIR,
+    CHUNK_SIZE,
+    CHUNK_OVERLAP,
+    get_embeddings,
+)
 
-# 1. Load environment variables
-load_dotenv()
 
-CHROMA_DIR = os.getenv("CHROMA_DIR", "data/chroma_db")
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
-CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", 500))
-CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", 100))
+def load_documents(directory_path: str):
+    """
+    Loads supported document types.
 
-# UPDATED: Targets the root-level or local /documents folder
-CORPUS_DIR = os.getenv("CORPUS_DIR", "documents/")
+    Supported formats:
+        - Markdown (.md, .markdown)
+        - Text (.txt)
+        - PDF (.pdf)
+        - HTML (.html, .htm)
+    """
 
-def load_and_chunk_markdown_files(directory_path: str):
-    """Loads markdown files and splits them preserving header hierarchies."""
-    
-    # Define headers to track during splitting
-    headers_to_split_on = [
-        ("#", "Header 1"),
-        ("##", "Header 2"),
-        ("###", "Header 3"),
-        ("####", "Header 4"),
+    documents = []
+
+    supported_patterns = [
+        "**/*.md",
+        "**/*.markdown",
+        "**/*.txt",
+        "**/*.pdf",
+        "**/*.html",
+        "**/*.htm",
     ]
-    
-    # Initialize splitters
+
+    for pattern in supported_patterns:
+
+        for file_path in Path(directory_path).glob(pattern):
+
+            print(f"Processing: {file_path}")
+
+            suffix = file_path.suffix.lower()
+
+            try:
+
+                if suffix in [".md", ".markdown"]:
+
+                    text = file_path.read_text(
+                        encoding="utf-8"
+                    )
+
+                    documents.append(
+                        {
+                            "content": text,
+                            "source": file_path.name,
+                            "path": str(file_path),
+                            "type": "markdown",
+                        }
+                    )
+
+                elif suffix == ".txt":
+
+                    loader = TextLoader(
+                        str(file_path),
+                        encoding="utf-8",
+                    )
+
+                    for doc in loader.load():
+
+                        documents.append(
+                            {
+                                "content": doc.page_content,
+                                "source": file_path.name,
+                                "path": str(file_path),
+                                "type": "text",
+                            }
+                        )
+
+                elif suffix == ".pdf":
+
+                    loader = PyPDFLoader(str(file_path))
+
+                    pages = loader.load()
+
+                    documents.append(
+                        {
+                            "content": "\n".join(
+                                page.page_content
+                                for page in pages
+                            ),
+                            "source": file_path.name,
+                            "path": str(file_path),
+                            "type": "pdf",
+                        }
+                    )
+
+                elif suffix in [".html", ".htm"]:
+
+                    loader = UnstructuredHTMLLoader(
+                        str(file_path)
+                    )
+
+                    docs = loader.load()
+
+                    documents.append(
+                        {
+                            "content": docs[0].page_content,
+                            "source": file_path.name,
+                            "path": str(file_path),
+                            "type": "html",
+                        }
+                    )
+
+            except Exception as e:
+
+                print(f"Skipping {file_path}: {e}")
+
+    return documents
+
+def chunk_documents(documents):
+    """
+    Chunks loaded documents.
+
+    Markdown preserves heading hierarchy.
+
+    Other document types use recursive chunking.
+    """
+
     markdown_splitter = MarkdownHeaderTextSplitter(
-        headers_to_split_on=headers_to_split_on, 
-        strip_headers=False  # Keeps markdown headers inside chunk text for system context
+        headers_to_split_on=[
+            ("#", "Header 1"),
+            ("##", "Header 2"),
+            ("###", "Header 3"),
+            ("####", "Header 4"),
+        ],
+        strip_headers=False,
     )
-    
+
     recursive_splitter = RecursiveCharacterTextSplitter(
         chunk_size=CHUNK_SIZE,
         chunk_overlap=CHUNK_OVERLAP,
-        length_function=len
     )
-    
-    final_chunks = []
-    
-    # UPDATED: Evaluates both standard .md and extended .markdown file definitions recursively
-    md_files = []
-    for ext in ("/**/*.md", "/**/*.markdown"):
-        md_files.extend(glob.glob(directory_path + ext, recursive=True))
-        
-    print(f"Found {len(md_files)} Markdown file(s) inside {directory_path} for ingestion.")
-    
-    for file_path in md_files:
-        print(f"Processing: {file_path}")
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                file_content = f.read()
-        except Exception as e:
-            print(f"Skipping file due to read error {file_path}: {e}")
-            continue
-            
-        # First layer: Split cleanly by Markdown headers
-        header_splits = markdown_splitter.split_text(file_content)
-        
-        # Second layer: Sub-split any section that exceeds our chunk size limit
-        for chunk in header_splits:
-            # Inject file origin into metadata for accurate citations later
-            chunk.metadata["source"] = os.path.basename(file_path)
-            chunk.metadata["file_path"] = file_path
-            
-            if len(chunk.page_content) > CHUNK_SIZE:
-                # Sub-split oversized segments recursively
-                sub_chunks = recursive_splitter.split_documents([chunk])
-                final_chunks.extend(sub_chunks)
-            else:
-                final_chunks.append(chunk)
-                
-    return final_chunks
 
-def main():
-    # Target directory verification
-    if not os.path.exists(CORPUS_DIR):
-        print(f"Error: Target directory '{CORPUS_DIR}' does not exist on this machine.")
-        return
+    chunks = []
 
-    # 2. Extract and structure chunks
-    print("Beginning document chunking strategy...")
-    chunks = load_and_chunk_markdown_files(CORPUS_DIR)
-    
-    if not chunks:
-        print("No documents were processed. Pipeline terminating.")
-        return
-        
-    print(f"Generated {len(chunks)} total text chunks.")
-    
-    # 3. Initialize local open-source embeddings model
-    print(f"Loading embedding model: {EMBEDDING_MODEL}...")
-    embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
-    
-    # 4. Generate embeddings and save vectors to ChromaDB disk persistent storage
-    print(f"Initializing and storing vectors inside {CHROMA_DIR}...")
-    vector_store = Chroma.from_documents(
+    for document in documents:
+
+        if document["type"] == "markdown":
+
+            header_chunks = markdown_splitter.split_text(
+                document["content"]
+            )
+
+            for chunk in header_chunks:
+
+                chunk.metadata["source"] = document["source"]
+                chunk.metadata["file_path"] = document["path"]
+                chunk.metadata["document_type"] = document["type"]
+                chunk.metadata["chunk_id"] = str(uuid.uuid4())
+                chunk.metadata["chunk_length"] = len(chunk.page_content)
+                if len(chunk.page_content) > CHUNK_SIZE:
+
+                    chunks.extend(
+                        recursive_splitter.split_documents(
+                            [chunk]
+                        )
+                    )
+
+                else:
+
+                    chunks.append(chunk)
+
+        else:
+
+            
+
+            doc = Document(
+                page_content=document["content"],
+                metadata={
+                    "source": document["source"],
+                    "file_path": document["path"],
+                    "document_type": document["type"],
+                },
+            )
+
+            chunks.extend(
+                recursive_splitter.split_documents([doc])
+            )
+
+    return chunks
+
+def build_vector_store(chunks):
+    """
+    Creates embeddings and stores them
+    in the Chroma vector database.
+    """
+
+    print("Loading embedding model...")
+
+    embeddings = get_embeddings()
+
+    print(
+        f"Initializing and storing vectors inside "
+        f"{CHROMA_DIR}..."
+    )
+
+    Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
-        persist_directory=CHROMA_DIR
+        persist_directory=CHROMA_DIR,
     )
-    
+
+    print("Vector database created successfully.")
+
+
+def main():
+
+    corpus_path = Path(CORPUS_DIR)
+
+    if not corpus_path.exists():
+        print(
+            f"Error: Target directory "
+            f"'{CORPUS_DIR}' does not exist."
+        )
+        return
+
+    print("Beginning document chunking strategy...")
+
+    documents = load_documents(CORPUS_DIR)
+
+    chunks = chunk_documents(documents)
+
+    if not chunks:
+        print("No documents were processed.")
+        return
+
+    print(f"Generated {len(chunks)} total text chunks.")
+
+    build_vector_store(chunks)
+
     print("Ingestion execution completed successfully!")
+
 
 if __name__ == "__main__":
     main()
