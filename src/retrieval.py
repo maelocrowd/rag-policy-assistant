@@ -47,7 +47,7 @@ class PolicyRetriever:
     def format_context(self, docs):
         """
         Formats retrieved chunks into a clean context string while
-        preventing duplicate chunks.
+        preventing duplicate chunks and maximizing LLM structural reading context.
         """
 
         context_blocks = []
@@ -91,10 +91,10 @@ class PolicyRetriever:
             )
 
             block = (
-                f"[Source Document {idx}]: {source_file} "
-                f"(Raw Distance: {distance})\n"
+                f"[Source Document {idx} File Target]: {source_file}\n"
+                f"[Raw Score Metric Distance]: {distance}\n"
                 f"[Section Hierarchy]: {structure}\n"
-                f"[Content]:\n"
+                f"[Verbatim Content Frame]:\n"
                 f"{clean_content}\n"
                 f"{'-' * 40}"
             )

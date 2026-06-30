@@ -1,17 +1,39 @@
+# -----------------------------------------------------------------------------
+# Core Framework & Interface Layers
+# -----------------------------------------------------------------------------
+streamlit==1.45.1
+flask==3.0.3
+flask-cors==5.0.0
+gunicorn==22.0.0          # REQUIRED: Production server runner for your Flask API
+requests==2.32.3          # REQUIRED: Used directly inside your Streamlit UI checks
+
+# -----------------------------------------------------------------------------
+# LangChain Ecosystem (Synchronized 0.3.x Stability Baseline)
+# -----------------------------------------------------------------------------
 langchain==0.3.25
 langchain-community==0.3.24
-pypdf==5.5.0
-markdown
-beautifulsoup4
 langchain-text-splitters==0.3.8
-sentence_transformers==4.1.0
 langchain-chroma==0.2.4
-chromadb
 langchain-huggingface==0.2.0
+
+# -----------------------------------------------------------------------------
+# Vector Database & Heavy AI Computation Dependencies
+# -----------------------------------------------------------------------------
+chromadb==0.5.3           # PINNED: Prevents underlying breaking SQLite/C++ engine faults
 openai==1.82.0
-streamlit==1.45.1
+sentence_transformers==3.0.1  # OPTIMIZED: Synchronized transformer indexing layer
+numpy==1.26.4             # PINNED: Locks C-extensions against system library collisions
+
+# -----------------------------------------------------------------------------
+# Document Extraction & Parsing Tools
+# -----------------------------------------------------------------------------
+pypdf==5.5.0
+markdown==3.6
+beautifulsoup4==4.12.3
 gdown==5.2.1
-python-dotenv
-numpy
-flask
-pytest
+python-dotenv==1.0.1
+
+# -----------------------------------------------------------------------------
+# Automation Testing Engine
+# -----------------------------------------------------------------------------
+pytest==8.2.2

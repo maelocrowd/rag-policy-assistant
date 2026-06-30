@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 
-
 # Load environment variables once
 load_dotenv()
 
@@ -26,12 +25,11 @@ TOP_K = int(os.getenv("TOP_K", 4))
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 LLM_MODEL = os.getenv("LLM_MODEL", "google/gemma-4-31b-it:free")
-# LLM_MODEL = os.getenv("LLM_MODEL", "google/gemma-2-27b-it:free")
 SEED = int(os.getenv("SEED", 42))
 
-# Default Chroma distance threshold
+
 MAX_DISTANCE_THRESHOLD = float(
-    os.getenv("MAX_DISTANCE_THRESHOLD", 1.25)
+    os.getenv("MAX_DISTANCE_THRESHOLD", 1.1)
 )
 
 # ============================================================================
@@ -54,7 +52,8 @@ def get_vector_store():
     """
     if not os.path.exists(CHROMA_DIR):
         raise FileNotFoundError(
-            f"Chroma directory '{CHROMA_DIR}' missing."
+            f"Chroma directory '{CHROMA_DIR}' missing. "
+            "Please make sure to run your document ingestion pipeline first."
         )
 
     return Chroma(

@@ -14,7 +14,7 @@ from langchain_community.document_loaders import (
     PyPDFLoader,
     UnstructuredHTMLLoader,
 )
-from utils import (
+from .utils import (
     CORPUS_DIR,
     CHROMA_DIR,
     CHUNK_SIZE,
@@ -116,7 +116,7 @@ def load_documents(directory_path: str):
 
                     documents.append(
                         {
-                            "content": docs[0].page_content,
+                            "content": docs.page_content,
                             "source": file_path.name,
                             "path": str(file_path),
                             "type": "html",
@@ -151,8 +151,16 @@ def chunk_documents(documents):
     recursive_splitter = RecursiveCharacterTextSplitter(
         chunk_size=CHUNK_SIZE,
         chunk_overlap=CHUNK_OVERLAP,
+        separators=[
+            "\n\n",
+            "\n* ",
+            "\n### ",
+            "\n## ",
+            "\n",
+            " ",
+            "",
+        ],
     )
-
     chunks = []
 
     for document in documents:
@@ -170,34 +178,34 @@ def chunk_documents(documents):
                 chunk.metadata["document_type"] = document["type"]
                 chunk.metadata["chunk_id"] = str(uuid.uuid4())
                 chunk.metadata["chunk_length"] = len(chunk.page_content)
-                if len(chunk.page_content) > CHUNK_SIZE:
 
-                    chunks.extend(
-                        recursive_splitter.split_documents(
-                            [chunk]
-                        )
-                    )
-
+                if len(chunk.page_content) > (CHUNK_SIZE * 2):
+                    sub_chunks = recursive_splitter.split_documents([chunk])
+                    for sub_c in sub_chunks:
+                        sub_c.metadata["chunk_id"] = str(uuid.uuid4())
+                        sub_c.metadata["chunk_length"] = len(sub_c.page_content)
+                    chunks.extend(sub_chunks)
                 else:
-
                     chunks.append(chunk)
 
         else:
-
-            
-
             doc = Document(
                 page_content=document["content"],
                 metadata={
                     "source": document["source"],
                     "file_path": document["path"],
                     "document_type": document["type"],
+                    "Header 1": f"Document Body ({document['type'].upper()})"
                 },
             )
 
-            chunks.extend(
-                recursive_splitter.split_documents([doc])
-            )
+            non_md_chunks = recursive_splitter.split_documents([doc])
+            
+            for chunk in non_md_chunks:
+                chunk.metadata["chunk_id"] = str(uuid.uuid4())
+                chunk.metadata["chunk_length"] = len(chunk.page_content)
+                
+            chunks.extend(non_md_chunks)
 
     return chunks
 

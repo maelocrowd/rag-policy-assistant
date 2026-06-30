@@ -1,0 +1,6 @@
+[server]
+# Completely disables the background file system watcher to stop exceptions
+fileWatcherType = "none"
+
+# Optional: Prevents your browser from automatically opening on every run if desired
+# headless = true
