@@ -22,7 +22,7 @@ langchain-huggingface==0.2.0
 chromadb==0.5.3           # PINNED: Prevents underlying breaking SQLite/C++ engine faults
 openai==1.82.0
 sentence_transformers==3.0.1  # OPTIMIZED: Synchronized transformer indexing layer
-numpy==1.26.4             # PINNED: Locks C-extensions against system library collisions
+numpy             # PINNED: Locks C-extensions against system library collisions
 
 # -----------------------------------------------------------------------------
 # Document Extraction & Parsing Tools
