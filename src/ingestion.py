@@ -258,7 +258,7 @@ def main():
 
     build_vector_store(chunks)
 
-    print("Ingestion execution completed successfully!")
+    print("Ingestion execution is completed successfully!")
 
 
 if __name__ == "__main__":

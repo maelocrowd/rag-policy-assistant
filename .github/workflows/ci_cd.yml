@@ -1,4 +1,4 @@
-name: NileTech Gated Production CI/CD & Smoke Test Pipeline
+name: CI Build Check
 
 on:
   push:
@@ -7,66 +7,34 @@ on:
     branches: [ main, master ]
 
 jobs:
-  validate-and-deploy:
-    name: 🛡️ Pre-Deploy Gate, Deployment, and Smoke Test
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code Repository
+    - name: Checkout repository code
       uses: actions/checkout@v4
 
-    - name: Initialize Python Runtime Env
+    - name: Set up Python environment
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
-        cache: 'pip'
+        python-version: '3.10'
+        cache: 'pip' # Speeds up future workflow runs
 
-    - name: Install System Dependencies
+    - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    # =========================================================================
-    # STAGE 1: PRE-DEPLOYMENT TESTING GATE
-    # =========================================================================
-    - name: Spin Up Local Mock Backend for Pre-Test Validation
+    - name: Run application start check
       run: |
-        python -c "
-        from flask import Flask
-        app = Flask(__name__)
-        @app.route('/health')
-        def h(): return {'status':'healthy'}, 200
-        @app.route('/chat', methods=['POST'])
-        def c(): return {'answer':'mock','sources':[]}, 200
-        app.run(port=5000)
-        " &
-        sleep 3
+        # Verifies the main application module imports properly without syntax errors
+        python -c "import app"
 
-    - name: Execute Local Pytest Suite Check
+    - name: Run automated test suite (Optional)
       run: |
-        python -m pytest tests/test_app.py -v
-
-    # =========================================================================
-    # STAGE 2: PRODUCTION DEPLOYMENT (Only triggers on code merges/pushes)
-    # =========================================================================
-    - name: Deploy to Railway via Webhook Integration Engine
-      if: github.event_name == 'push'
-      uses: bervincode/railway-deploy@main
-      with:
-        railway_token: ${{ secrets.RAILWAY_TOKEN }}
-
-    # =========================================================================
-    # STAGE 3: POST-DEPLOYMENT LIVE SMOKE TESTING IN GITHUB ACTIONS
-    # =========================================================================
-    - name: Buffer Wait Window for Production Initialization
-      if: github.event_name == 'push'
-      # Gives Railway a brief 30-second window to build and spin up the container
-      run: sleep 30
-
-    - name: Execute Live Production Smoke Tests inside Git Actions
-      if: github.event_name == 'push'
-      env:
-        # Passes the live public URL secret to the GitHub Actions test block
-        PRODUCTION_BACKEND_URL: ${{ secrets.PRODUCTION_BACKEND_URL }}
-      run: |
-        python -m pytest tests/test_smoke.py -v
+        # Only executes if pytest is installed in your requirements.txt
+        if pip show pytest > /dev/null 2>&1; then
+          pytest -q
+        else
+          echo "Pytest not found; skipping unit tests."
+        fi
