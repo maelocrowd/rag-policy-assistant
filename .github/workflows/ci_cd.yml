@@ -22,8 +22,12 @@ jobs:
       TOP_K: 4
       SEED: 42
       STREAMLIT_SERVER_HEADLESS: "true"
-      # Forces HuggingFace to use a predictable caching route
       HF_HOME: ~/.cache/huggingface
+      
+      # --- NETWORK TIMEOUT OVERRIDES ---
+      # Forces common Python HTTP libraries (httpx, urllib3) to wait longer
+      HTTPX_TIMEOUT: "60.0"
+      REQUESTS_TIMEOUT: "60"
 
     steps:
     - name: Checkout repository code
@@ -35,7 +39,6 @@ jobs:
         python-version: '3.11'
         cache: 'pip'
 
-    # Cache AI Models so they don't timeout your backend startup
     - name: Cache HuggingFace models
       uses: actions/cache@v4
       with:
@@ -47,13 +50,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install pytest streamlit
+        # Installs pytest-timeout to globally control the test step runner limits
+        python -m pip install pytest streamlit pytest-timeout
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Pre-download Embedding Model
       run: |
-        # Download the embedding model before starting the server 
-        # This keeps backend initialization lean and fast
         python -c "from transformers import AutoTokenizer, AutoModel; AutoTokenizer.from_pretrained('${{ env.EMBEDDING_MODEL }}'); AutoModel.from_pretrained('${{ env.EMBEDDING_MODEL }}')"
 
     - name: Run application syntax checks
@@ -66,11 +68,9 @@ jobs:
         nohup python -u api.py > backend.log 2>&1 &
         
         echo "Waiting for backend server to spin up and fully load models..."
-        # Extended window to 45 seconds to safely clear slow database configurations
         for i in {1..45}; do
           if nc -z 127.0.0.1 5000; then
             echo "✅ Backend network port is accessible!"
-            # Give the framework application loop 3 extra seconds to finish starting
             sleep 3
             exit 0
           fi
@@ -98,4 +98,5 @@ jobs:
 
     - name: Run test suite
       run: |
-        pytest -q tests/
+        # --timeout=90 forces pytest to wait up to 90 seconds for long generation streams
+        pytest -q --timeout=90 tests/
