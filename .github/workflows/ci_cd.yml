@@ -84,4 +84,4 @@ jobs:
     - name: Run test suite
       run: |
         # Executes all tests inside the tests/ directory
-        pytest -q tests/
+        pytest tests/ -v
