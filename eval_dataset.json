@@ -1,233 +1,369 @@
 [
   {
     "id": "Q01",
-    "question": "Which national proclamation governs the human resource management frameworks of NileTech Solutions Ltd.?",
-    "answer": "The human resource management frameworks of NileTech Solutions Ltd. are systematically aligned with the statutory benchmarks established under the Federal Civil Servants Proclamation.",
-    "document_reference": "employee_handbook.md",
-    "section_reference": "1. Introduction"
+    "question": "What is the company's policy regarding discrimination during recruitment or internal training?",
+    "answer": "Recruitment and internal training are based on equal opportunity and objective merit. The company prohibits discrimination based on ethnicity, religion, political affiliation, gender, language, disability, or health status. Recruitment is conducted using objective professional qualifications, and affirmative actions may be applied where appropriate.",
+    "document_references": [
+      "employee-handbook.md",
+      "federal-civil-servants-proclamation.pdf",
+      "code-of-conduct.md"
+    ],
+    "section_references": [
+      "2. Company Overview",
+      "Article 13. Recruitment and Selection",
+      "1. Oath of Fidelity and Core Obligations"
+    ]
   },
   {
     "id": "Q02",
-    "question": "What is the company's policy regarding discrimination during recruitment or internal training?",
-    "answer": "NileTech Solutions Ltd. enforces a strict policy of equal opportunity. There shall be no discrimination among job seekers or employees in filling vacancies, promotion, transfer, redeployment, education, or training because of their ethnic origin, sex, religion, political outlook, disability, HIV/AIDS status, or any other ground.",
-    "document_reference": "employee_handbook.md",
-    "section_reference": "1.1 Non-Discrimination and Equal Opportunity"
+    "question": "What are the core institutional principles that NileTech Solutions Ltd. incorporates from the Federal Civil Servants Proclamation?",
+    "answer": "The company incorporates principles of service delivery, objective accountability, digital service workflows, diversity, equal opportunity, inclusiveness, and legally compliant human resource management aligned with the Federal Civil Servants Proclamation.",
+    "document_references": [
+      "employee-handbook.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "2. Company Overview",
+      "General Provisions"
+    ]
   },
   {
     "id": "Q03",
-    "question": "What are the core institutional principles that NileTech Solutions Ltd. incorporates from the Federal Civil Servants Proclamation?",
-    "answer": "The company framework focuses heavily on maximizing service delivery, ensuring objective accountability, deploying modern digital service workflows, and building internal teams that respect and reflect societal diversity, equal opportunity, and workplace inclusiveness.",
-    "document_reference": "employee_handbook.md",
-    "section_reference": "2. Company Overview"
+    "question": "What standard weekly working hours limit must NileTech Solutions Ltd. adhere to, and how is the schedule distributed on Fridays?",
+    "answer": "The company operates under a statutory limit of 39 working hours per week. Friday working hours are 8:30 AM–11:30 AM and 1:30 PM–5:30 PM.",
+    "document_references": [
+      "employee-handbook.md"
+    ],
+    "section_references": [
+      "3. Working Conditions"
+    ]
   },
   {
     "id": "Q04",
-    "question": "What standard weekly working hours limit must NileTech Solutions Ltd. adhere to, and how is the schedule distributed on Fridays?",
-    "answer": "The company must adhere to a statutory limit of 39 hours per week. On Fridays, the hours are split into a morning session from 8:30 AM to 11:00 AM and an afternoon session from 1:30 PM to 5:30 PM.",
-    "document_reference": "employee_handbook.md",
-    "section_reference": "3. Working Conditions"
+    "question": "How does NileTech Solutions Ltd. ensure wage equity for roles within the same job grade?",
+    "answer": "The company uses a transparent salary structure where positions of equal value receive identical base salaries. Salary scales clearly define base pay, increments, and maximum salary ceilings for every job grade.",
+    "document_references": [
+      "employee-handbook.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "4. Compensation and Salary Protections",
+      "Salary Scale"
+    ]
   },
   {
     "id": "Q05",
-    "question": "How does NileTech Solutions Ltd. ensure wage equity for roles within the same job grade?",
-    "answer": "All organizational positions of equal value feature an identical base salary to honor the statutory rule of equal pay for equal work.",
-    "document_reference": "employee_handbook.md",
-    "section_reference": "4.1 Salary Scale and Equal Pay for Equal Work"
+    "question": "What is the absolute maximum percentage of an employee's monthly salary that can be deducted due to a court order or legal provision?",
+    "answer": "Court-ordered or legally authorized salary deductions may not exceed one-third (33.3%) of the employee's monthly salary.",
+    "document_references": [
+      "employee-handbook.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "4. Compensation and Salary Protections",
+      "Article 9"
+    ]
   },
   {
     "id": "Q06",
-    "question": "What is the absolute maximum percentage of an employee's monthly salary that can be deducted due to a court order or legal provision?",
-    "answer": "Any statutory or court-ordered deductions executed against an employee's monthly salary shall never exceed an absolute ceiling of one-third (33.3%) of the employee's total monthly salary.",
-    "document_reference": "employee_handbook.md",
-    "section_reference": "4.2 Mandatory Salary Deductions and Protections"
+    "question": "How often are permanent employees eligible for a salary step increment under the performance evaluation framework?",
+    "answer": "Permanent employees are entitled to a salary step increment every two years, provided their performance evaluation meets the required standard.",
+    "document_references": [
+      "employee-handbook.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "5. Performance, Increments, and Separation",
+      "Article 32. Salary Increment and Incentives"
+    ]
   },
   {
     "id": "Q07",
-    "question": "How often are permanent employees eligible for a salary step increment under the performance evaluation framework?",
-    "answer": "Permanent employees are entitled to a salary step increment every two years, provided their performance evaluation outcomes meet or exceed standard requirements.",
-    "document_reference": "employee_handbook.md",
-    "section_reference": "5.1 Continuous Performance Evaluation and Increments"
+    "question": "Under what performance conditions can a long-term employee with over five years of above-satisfactory results be dismissed for inefficiency?",
+    "answer": "Employees with more than five years of above-satisfactory performance may only be dismissed for inefficiency if their performance falls below satisfactory for four consecutive evaluation periods.",
+    "document_references": [
+      "employee-handbook.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "5. Performance, Increments, and Separation",
+      "Article 85. Termination due to Inefficiency"
+    ]
   },
   {
     "id": "Q08",
-    "question": "Under what performance conditions can a long-term employee with over five years of above-satisfactory results be dismissed for inefficiency?",
-    "answer": "Dismissal for inefficiency is barred unless the employee's performance drops below satisfactory for four successive evaluation periods.",
-    "document_reference": "employee_handbook.md",
-    "section_reference": "5.5 Separation of Service, Retrenchment, and Severance Pay"
+    "question": "If workforce reduction occurs within a department, how are employees selected for retrenchment?",
+    "answer": "Retrenchment is based on objective performance and qualifications. Employees with the lowest performance evaluations and qualifications among those holding the same position are selected first.",
+    "document_references": [
+      "employee-handbook.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "5. Performance, Increments, and Separation",
+      "Article 87. Retrenchment"
+    ]
   },
   {
     "id": "Q09",
-    "question": "If workforce reduction occurs within a department, how are employees selected for retrenchment?",
-    "answer": "Selection for retrenchment is based strictly on performance and qualifications. Individuals with the lowest evaluation metrics and qualifications compared to peers in the identical position shall be retrenched first.",
-    "document_reference": "employee_handbook.md",
-    "section_reference": "5.5 Separation of Service, Retrenchment, and Severance Pay"
+    "question": "How is severance pay calculated for a retrenched employee who is not entitled to a pension allowance?",
+    "answer": "Eligible retrenched employees receive three months' salary for the first year of service plus one-third of a month's salary for every additional year, up to a maximum of twelve months' salary.",
+    "document_references": [
+      "employee-handbook.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "5. Performance, Increments, and Separation",
+      "Article 92. Severance Pay"
+    ]
   },
   {
     "id": "Q10",
-    "question": "How is severance pay calculated for a retrenched employee who is not entitled to a pension allowance?",
-    "answer": "Severance pay equals three months' salary for the first year of service, plus one-third of a monthly salary for each additional year of service, capped at twelve months' total salary.",
-    "document_reference": "employee_handbook.md",
-    "section_reference": "5.5 Separation of Service, Retrenchment, and Severance Pay"
+    "question": "When will an employee be denied a certificate of service or official clearance after leaving the company?",
+    "answer": "Employees who leave the company while still owing financial obligations or remaining bound by a training contract will not receive an official certificate of service or clearance until those obligations have been fully settled.",
+    "document_references": [
+      "employee-handbook.md"
+    ],
+    "section_references": [
+      "4. Compensation and Salary Protections"
+    ]
   },
-  {
+    {
     "id": "Q11",
-    "question": "Which employees are eligible to participate in the remote work policy framework?",
-    "answer": "The policy applies to all full-time permanent employees who have successfully completed their probationary period, subject to role compatibility, departmental performance metrics, and written approval from their direct department manager.",
-    "document_reference": "remote_work_policy.md",
-    "section_reference": "1. Scope and Eligibility"
+    "question": "For what purpose may business expenses and corporate allowances be authorized at NileTech Solutions Ltd.?",
+    "answer": "Business expenses and corporate allowances may be authorized only for carrying out the core functions of the organization. Discretionary expenses are not reimbursable unless they directly support corporate operations, technological service delivery, or approved public service goals.",
+    "document_references": [
+      "expense-policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "1. Institutional Principles and Allowances",
+      "Article 10. Allowance"
+    ]
   },
   {
     "id": "Q12",
-    "question": "What is the maximum number of days per week an eligible employee can work remotely, and whose authorization is required?",
-    "answer": "Eligible employees may work remotely for up to three days per week, subject to written approval from their direct department manager.",
-    "document_reference": "remote_work_policy.md",
-    "section_reference": "2. Core Work Schedule and Availability"
+    "question": "What documentation must employees provide when submitting an expense reimbursement claim, and when must expense authorization be obtained?",
+    "answer": "Employees must obtain formal written authorization from their department head before incurring an operational or departmental expense. Every reimbursement claim must include detailed invoices, receipts, and itemized bills clearly showing the volume, cost, and date of the transaction.",
+    "document_references": [
+      "expense-policy.md"
+    ],
+    "section_references": [
+      "2. Expense Authorization and Reimbursement"
+    ]
   },
   {
     "id": "Q13",
-    "question": "Under what circumstances can an employee's remote work privileges be suspended or fully revoked?",
-    "answer": "Remote work privileges may be suspended or fully revoked if an employee's performance appraisal falls below satisfactory or if the arrangement compromises operational interests.",
-    "document_reference": "remote_work_policy.md",
-    "section_reference": "3. Performance Tracking and Transparency"
+    "question": "What salary protections do employees receive when they do not work on an officially recognized public holiday, weekly rest day, or a government-ordered office closure?",
+    "answer": "Employees are entitled to a full day of rest on officially recognized public holidays, weekly rest days, and government-ordered office closures without any reduction to their regular monthly salary or base pay.",
+    "document_references": [
+      "holiday-policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "1. Recognized Public Holidays and Pay Protections",
+      "Article 59. Public Holidays and Weekly Rest Days"
+    ]
   },
   {
     "id": "Q14",
-    "question": "How many months of continuous service must a newly appointed employee complete before becoming eligible to take annual leave?",
-    "answer": "A newly appointed employee must complete eleven consecutive months of service before becoming eligible for annual leave.",
-    "document_reference": "pto_policy.md",
-    "section_reference": "1. Annual Leave Administration"
+    "question": "What options must NileTech Solutions Ltd. provide to an employee who is required to work on an official public holiday due to compelling business circumstances?",
+    "answer": "Employees who are required to work on an official public holiday or a government-closed day due to compelling business circumstances must be allowed to choose between receiving standardized overtime pay or a compensatory day of leave.",
+    "document_references": [
+      "holiday-policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "2. Compelling Work Requirements and Overtime Protocols",
+      "Article 59. Public Holidays and Weekly Rest Days"
+    ]
   },
   {
     "id": "Q15",
-    "question": "What is the maximum statutory ceiling for annual leave working days, and how does length of service affect accumulation?",
-    "answer": "Employees start with 20 working days of annual leave and receive one additional day for every additional year of service, up to a maximum of 30 working days.",
-    "document_reference": "pto_policy.md",
-    "section_reference": "1. Annual Leave Administration"
+    "question": "If an employee is required to work on a standard weekly rest day because of emergency business needs, what compensation must the company provide?",
+    "answer": "An employee who is required by a competent supervisor to work on a standard weekly rest day due to emergency business needs must be granted an equal compensatory day of leave during the regular working days of the immediate following week.",
+    "document_references": [
+      "holiday-policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "2. Compelling Work Requirements and Overtime Protocols",
+      "Article 59. Public Holidays and Weekly Rest Days"
+    ]
   },
   {
     "id": "Q16",
-    "question": "What is the maximum duration that annual leave can be postponed due to compelling operational pressures?",
-    "answer": "Annual leave may be postponed for up to two successive budget years and must be granted and used during the third budget year.",
-    "document_reference": "pto_policy.md",
-    "section_reference": "1. Annual Leave Administration"
+    "question": "Under what circumstances may an employee be denied a certificate of service or final employment clearance when leaving NileTech Solutions Ltd.?",
+    "answer": "An employee who resigns or otherwise leaves the company may be denied a certificate of service or final employment clearance until all assigned Company IT assets have been returned and any outstanding obligations to the Company have been fully satisfied.",
+    "document_references": [
+      "IT_assets_and_acceptable_use_policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "10. Return of Assets and Clearance Procedures",
+      "Certificate of Service"
+    ]
   },
   {
     "id": "Q17",
-    "question": "What is the total duration of paid maternity leave, and how is it distributed between prenatal and postnatal periods?",
-    "answer": "Maternity leave consists of 120 consecutive days of paid leave, including 30 prenatal days and 90 postnatal days.",
-    "document_reference": "pto_policy.md",
-    "section_reference": "2. Family and Specialized Leaves"
+    "question": "What responsibilities do employees have if a Company IT asset is lost, stolen, damaged, or involved in a security incident?",
+    "answer": "Employees must promptly report any loss, theft, damage, malfunction, unauthorized access, malware infection, data breach, or other security incident involving Company IT assets to their supervisor and the Information Technology Department so that appropriate corrective actions can be taken.",
+    "document_references": [
+      "IT_assets_and_acceptable_use_policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "5. Information Security Responsibilities",
+      "6. Care, Custody, and Protection of Assets",
+      "Duties and Responsibilities of Civil Servants"
+    ]
   },
   {
     "id": "Q18",
-    "question": "How many days of paid leave is an employee entitled to if they experience a miscarriage between three and six months of pregnancy?",
-    "answer": "The employee is entitled to 30 consecutive days of paid leave, subject to medical confirmation.",
-    "document_reference": "pto_policy.md",
-    "section_reference": "2. Family and Specialized Leaves"
+    "question": "What eligibility requirements must a candidate satisfy before being formally onboarded at NileTech Solutions Ltd.?",
+    "answer": "Before being formally onboarded, a candidate must meet the minimum age requirement, present a valid certificate of occupational competence, submit the required police background check and medical fitness certificate, and formally sign the corporate Oath of Fidelity. An HIV/AIDS test shall not be required as part of the onboarding medical documentation.",
+    "document_references": [
+      "onboarding-policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "1. Onboarding Requirements and Eligibility",
+      "Requirements for Recruitment"
+    ]
   },
   {
     "id": "Q19",
-    "question": "How many working days of paid paternity leave are male employees entitled to at the time of their spouse's delivery?",
-    "answer": "Male employees are entitled to 10 working days of fully paid paternity leave.",
-    "document_reference": "pto_policy.md",
-    "section_reference": "2. Family and Specialized Leaves"
+    "question": "How is the probation period administered, and under what conditions may it be extended or result in permanent appointment at NileTech Solutions Ltd.?",
+    "answer": "New employees serve a six-month probation period during which their performance is continuously evaluated. If performance is below average, management may grant a one-time extension of up to three additional months. Employees who achieve an average or higher cumulative performance rating during or at the end of probation receive a formal letter of permanent appointment, while those who fail to meet the required standard after the extended probation have their employment terminated.",
+    "document_references": [
+      "onboarding-policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "2. Probationary Period Structure",
+      "Probation Period"
+    ]
   },
   {
     "id": "Q20",
-    "question": "What is the maximum duration of sick leave a permanent employee can take across a four-year cycle?",
-    "answer": "Employees who have completed probation are entitled to a maximum of 12 months of sick leave across a four-year cycle.",
-    "document_reference": "pto_policy.md",
-    "section_reference": "2. Family and Specialized Leaves"
+    "question": "How are annual leave entitlements calculated, and when does a newly appointed employee become eligible to take annual leave at NileTech Solutions Ltd.?",
+    "answer": "A newly appointed employee becomes eligible for annual leave only after completing eleven (11) consecutive months of service. Employees receive twenty (20) working days of annual leave for their first year of service, with one additional working day granted for each subsequent year of service up to a maximum of thirty (30) working days. Previous qualifying service in compliant federal or regional institutions is counted toward this entitlement.",
+    "document_references": [
+      "PTO-policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "1. Annual Leave Administration",
+      "Annual Leave"
+    ]
   },
-  {
+    {
     "id": "Q21",
-    "question": "What documentation requirements must accompany all operational expense reimbursement claims?",
-    "answer": "Detailed invoices, receipts, and itemized bills must accompany all expense claims and clearly indicate the volume, cost, and date of the transaction.",
-    "document_reference": "expense_policy.md",
-    "section_reference": "2. Expense Authorization and Reimbursement"
+    "question": "What paid maternity and paternity leave benefits are employees entitled to under NileTech Solutions Ltd.'s leave policy?",
+    "answer": "A pregnant employee is entitled to 120 consecutive days of fully paid maternity leave, consisting of 30 days of prenatal leave and 90 days of post-confinement leave. If childbirth occurs before the prenatal leave is fully used, the remaining prenatal days are added to the post-confinement leave. Male employees are entitled to ten (10) working days of fully paid paternity leave upon the birth of their child.",
+    "document_references": [
+      "PTO-policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "2. Family and Specialized Leaves",
+      "Maternity Leave",
+      "Paternity Leave"
+    ]
   },
   {
     "id": "Q22",
-    "question": "What is the disciplinary consequence if an employee submits a fraudulent receipt or intentionally misallocates company procurement funds?",
-    "answer": "The employee will be subject to disciplinary penalties, including dismissal and possible civil liability for damages.",
-    "document_reference": "expense_policy.md",
-    "section_reference": "2. Expense Authorization and Reimbursement"
+    "question": "Which specific category of personnel is eligible for remote work under NileTech Solutions Ltd.'s policy, and how does this status map to the legal definition of permanent workers?",
+    "answer": "Remote work eligibility applies strictly to full-time permanent employees who have successfully completed their probationary period. This aligns with the legal framework where permanent status is officially granted via a letter of permanent appointment once a probationary civil servant records an average or higher performance evaluation result.",
+    "document_references": [
+      "Remote Work Policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "1. Scope and Eligibility",
+      "20. Permanent Appointment"
+    ]
   },
   {
     "id": "Q23",
-    "question": "Under what condition is an injury sustained during daily transit legally classified as an employment injury?",
-    "answer": "An injury is classified as an employment injury if it occurs while traveling in a vehicle provided directly by the company or expressly hired for employee transportation.",
-    "document_reference": "travel_policy.md",
-    "section_reference": "2. Travel Accident and Injury Protections"
+    "question": "How do the performance evaluation criteria used to track remote workers at NileTech Solutions Ltd. align with statutory objectives for personnel decisions?",
+    "answer": "NileTech Solutions Ltd. tracks performance based on tangible work outcomes, target deadlines, volume, and quality of technical execution. This directly matches statutory objectives, which mandate evaluating employees on continuous, evidence-based performance results to verify actual volume, quality, time, and cost against work plans to drive administrative decisions.",
+    "document_references": [
+      "Remote Work Policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "3. Performance Tracking and Transparency",
+      "31. Performance Evaluation"
+    ]
   },
   {
     "id": "Q24",
-    "question": "What types of travel-related injuries are excluded from company injury leave and medical benefits?",
-    "answer": "Injuries resulting from deliberate acts, violations of safety rules, or intoxication caused by drugs or alcohol are excluded.",
-    "document_reference": "travel_policy.md",
-    "section_reference": "2. Travel Accident and Injury Protections"
+    "question": "What legal protections govern access to employee personnel records under NileTech Solutions Ltd.'s policy, and who can view them without explicit employee consent?",
+    "answer": "Every employee has the right to access all information in their personnel records or receive a copy. Access by any individual other than the concerned administrative staff requires the employee's explicit written consent, a competent court order, or an explicit provision of the law. Additionally, depositing any document into a record without making it known to the employee is strictly prohibited.",
+    "document_references": [
+      "Security Policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "2. Personnel Records and Data Privacy",
+      "63. Personnel Records"
+    ]
   },
   {
     "id": "Q25",
-    "question": "Who is authorized to access an employee's secure personnel files without their explicit written consent?",
-    "answer": "Only authorized human resource personnel may access personnel files unless access is authorized by a court order or legal provision.",
-    "document_reference": "security_policy.md",
-    "section_reference": "2. Personnel Records and Data Privacy"
+    "question": "What obligations do employees and institutions share regarding workplace neutrality and physical safety reporting?",
+    "answer": "Institutions must ensure the working environment is completely free from any form of religious practices or activities, and civil servants are obligated to refrain from exercising these practices at the workplace. For physical safety, employees are legally required to promptly inform the concerned officer of any situation or hazard they believe could present a risk to the environment or personnel.",
+    "document_references": [
+      "Security Policy.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "3. Workplace Environment Security",
+      "54. Safety Measures",
+      "65. Responsibilities of Government Institutions",
+      "66. Obligations of Civil Servants"
+    ]
   },
   {
-    "id": "Q26",
-    "question": "What restriction applies to adding documents, performance reviews, or disciplinary files to an employee's personnel profile?",
-    "answer": "No document may be added to an employee's personnel record without informing the employee beforehand.",
-    "document_reference": "security_policy.md",
-    "section_reference": "2. Personnel Records and Data Privacy"
-  },
-  {
+  "id": "Q26",
+  "question": "Under what conditions is a travel-related injury legally covered as an employment injury, and what specific behaviors exclude an employee from these medical benefits?",
+  "answer": "An injury is covered if it occurs while carrying out orders from a competent authority outside regular hours/locations, or while commuting in a vehicle provided or hired by the institution. However, benefits are completely excluded if the injury is caused by the employee's deliberate act, non-observance of express safety rules, or reporting to travel duties in a state of intoxication.",
+  "document_references": [
+    "Travel Policy.md",
+    "federal-civil-servants-proclamation.pdf"
+  ],
+  "section_references": [
+    "2. Travel Accident and Injury Protections",
+    "53. Employment Injury"
+  ]
+},
+ {
     "id": "Q27",
-    "question": "What workspace rule is established regarding religious activities and expressions within corporate premises?",
-    "answer": "Company offices must remain free from religious practices, activities, and displays of sectarian materials to preserve a neutral workplace environment.",
-    "document_reference": "security_policy.md",
-    "section_reference": "3. Workplace Environment Security"
+    "question": "What core ethical values and constraints are detailed in the Oath of Fidelity regarding an employee's personal religious and political expressions at the workplace?",
+    "answer": "The Oath of Fidelity mandates that employees remain loyal to the public and the constitution, serving without bias or discrimination. It strictly constrains personal expression by requiring employees to refrain from exercising any activities or practices reflecting their own religion at the workplace, and explicitly prohibits using their position to advance personal political interests.",
+    "document_references": [
+      "Code of Conduct.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "1. Oath of Fidelity and Core Obligations",
+      "17. Oath of Fidelity",
+      "66. Obligations of Civil Servants"
+    ]
   },
   {
     "id": "Q28",
-    "question": "What is NileTech Solutions Ltd.'s policy regarding employees accepting gifts or financial favors from clients?",
-    "answer": "Employees are prohibited from soliciting or accepting gifts, financial favors, or hospitality that may influence professional services or decisions.",
-    "document_reference": "code_of_conduct.md",
-    "section_reference": "2. Anti-Bribery and Corrupt Practices"
-  },
- {
-  "id": "Q29",
-  "question": "Under what circumstances may an employee be held accountable for the loss, theft, or damage of company IT assets?",
-  "answer": "Employees may be held accountable when the loss, theft, damage, or destruction of company assets results from negligence, misuse, unauthorized activities, intentional misconduct, or violation of company policies. Employees are not liable for normal wear and tear resulting from authorized use.",
-  "document_reference": "IT_assets_and_acceptable_use_policy.md",
-  "section_reference": "9. Loss, Damage, and Liability"
-},
-{
-  "id": "Q30",
-  "question": "What are the requirements for returning company assets when an employee leaves NileTech Solutions Ltd.?",
-  "answer": "Employees must immediately return all company-owned assets and cooperate with asset verification, data transfer, account deactivation, and clearance procedures. Final employment clearance, certificate of service, and other employment documentation may be subject to the return of all assigned company assets and fulfillment of applicable obligations.",
-  "document_reference": "IT_assets_and_acceptable_use_policy.md",
-  "section_reference": "10. Return of Assets and Clearance Procedures"
-},
-  {
-    "id": "Q31",
-    "question": "What specific background check clearance must a new hire provide during onboarding?",
-    "answer": "New hires must provide a police background check confirming the absence of specified criminal convictions within the preceding five years.",
-    "document_reference": "onboarding_policy.md",
-    "section_reference": "1. Onboarding Requirements and Eligibility"
-  },
-  {
-    "id": "Q32",
-    "question": "What happens if a new hire's performance evaluation falls below average during their initial probation period?",
-    "answer": "Management may extend probation once for an additional three months. If performance remains below average, employment is terminated.",
-    "document_reference": "onboarding_policy.md",
-    "section_reference": "2. Probationary Period Structure"
-  },
-  {
-    "id": "Q33",
-    "question": "How is a probationary period affected if a female employee takes maternity leave?",
-    "answer": "The probation period is suspended during qualifying maternity leave and resumes upon the employee's return to work.",
-    "document_reference": "onboarding_policy.md",
-    "section_reference": "2. Probationary Period Structure"
+    "question": "What actions constitute a violation of anti-bribery rules, and what category of disciplinary action applies to these infractions?",
+    "answer": "A violation occurs when an employee solicits or accepts any gift, present, financial favor, or reward in consideration of services rendered or expected to be rendered. These infractions, along with theft, fraud, and breach of trust, are classified as major ethical violations that entail rigorous disciplinary penalties, which can include a fine up to three months' salary, downgrading, or dismissal.",
+    "document_references": [
+      "Code of Conduct.md",
+      "federal-civil-servants-proclamation.pdf"
+    ],
+    "section_references": [
+      "2. Anti-Bribery and Corrupt Practices",
+      "66. Obligations of Civil Servants",
+      "69. Types and Classification of Disciplinary Penalties",
+      "70. Offences Entailing Rigorous Disciplinary Penalties"
+    ]
   }
-]
+  ]

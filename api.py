@@ -37,7 +37,6 @@ def health_check():
 
 @app.route("/chat", methods=["POST"])
 def chat():
-
     data = request.get_json()
 
     if not data or "question" not in data:
@@ -52,11 +51,17 @@ def chat():
     try:
         result = rag.generate(question)
 
-        # If generate() already returns answer + sources
         if isinstance(result, dict):
-            return jsonify(result), 200
+            # ─── FRONTEND PROTECTION & SERIAlIZATION FIX ────────────────────
+            # Create a clean frontend payload that extracts only user-facing keys
+            # to safely isolate and remove raw 'source_documents' evaluation objects.
+            frontend_payload = {
+                "answer": result.get("answer", ""),
+                "sources": result.get("sources", [])
+            }
+            return jsonify(frontend_payload), 200
 
-        # Backward compatibility if generate() returns only a string
+        # Backward compatibility if generate() returns only a string string
         return jsonify(
             {
                 "answer": result,
