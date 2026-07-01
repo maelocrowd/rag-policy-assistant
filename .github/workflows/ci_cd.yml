@@ -10,7 +10,6 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    # Global environment variables loaded directly into your test runtime
     env:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       LLM_MODEL: google/gemma-4-31b-it:free
@@ -22,8 +21,9 @@ jobs:
       CHUNK_OVERLAP: 100
       TOP_K: 4
       SEED: 42
-      # Forces Streamlit to run headlessly without browser prompts
       STREAMLIT_SERVER_HEADLESS: "true"
+      # Forces HuggingFace to use a predictable caching route
+      HF_HOME: ~/.cache/huggingface
 
     steps:
     - name: Checkout repository code
@@ -35,27 +35,43 @@ jobs:
         python-version: '3.11'
         cache: 'pip'
 
+    # Cache AI Models so they don't timeout your backend startup
+    - name: Cache HuggingFace models
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/huggingface
+        key: ${{ runner.os }}-hf-${{ env.EMBEDDING_MODEL }}
+        restore-keys: |
+          ${{ runner.os }}-hf-
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         python -m pip install pytest streamlit
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+    - name: Pre-download Embedding Model
+      run: |
+        # Download the embedding model before starting the server 
+        # This keeps backend initialization lean and fast
+        python -c "from transformers import AutoTokenizer, AutoModel; AutoTokenizer.from_pretrained('${{ env.EMBEDDING_MODEL }}'); AutoModel.from_pretrained('${{ env.EMBEDDING_MODEL }}')"
+
     - name: Run application syntax checks
       run: |
-        # Verifies files compiled properly before starting them up
         python -m py_compile api.py
         python -m py_compile app.py
 
     - name: Start Backend API Server (Port 5000)
       run: |
-        # Launch backend unbuffered in background
         nohup python -u api.py > backend.log 2>&1 &
         
-        echo "Waiting for backend server to spin up..."
-        for i in {1..15}; do
+        echo "Waiting for backend server to spin up and fully load models..."
+        # Extended window to 45 seconds to safely clear slow database configurations
+        for i in {1..45}; do
           if nc -z 127.0.0.1 5000; then
-            echo "✅ Backend is up!"
+            echo "✅ Backend network port is accessible!"
+            # Give the framework application loop 3 extra seconds to finish starting
+            sleep 3
             exit 0
           fi
           sleep 1
@@ -66,7 +82,6 @@ jobs:
 
     - name: Start Streamlit App Server (Port 8501)
       run: |
-        # Launch Streamlit app in background (default port 8501)
         nohup streamlit run app.py > streamlit.log 2>&1 &
         
         echo "Waiting for Streamlit server to spin up..."
@@ -83,5 +98,4 @@ jobs:
 
     - name: Run test suite
       run: |
-        # Executes all tests inside the tests/ directory
-        pytest tests/ -v
+        pytest -q tests/
