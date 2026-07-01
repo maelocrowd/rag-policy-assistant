@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    # Global environment variables needed by your app and tests
+    # Global environment variables loaded directly into your test runtime
     env:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       LLM_MODEL: google/gemma-4-31b-it:free
@@ -22,6 +22,8 @@ jobs:
       CHUNK_OVERLAP: 100
       TOP_K: 4
       SEED: 42
+      # Forces Streamlit to run headlessly without browser prompts
+      STREAMLIT_SERVER_HEADLESS: "true"
 
     steps:
     - name: Checkout repository code
@@ -36,14 +38,50 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install pytest
+        python -m pip install pytest streamlit
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Run application start checks
+    - name: Run application syntax checks
       run: |
-        python -c "import api"
-        python -c "import app"
+        # Verifies files compiled properly before starting them up
+        python -m py_compile api.py
+        python -m py_compile app.py
+
+    - name: Start Backend API Server (Port 5000)
+      run: |
+        # Launch backend unbuffered in background
+        nohup python -u api.py > backend.log 2>&1 &
+        
+        echo "Waiting for backend server to spin up..."
+        for i in {1..15}; do
+          if nc -z 127.0.0.1 5000; then
+            echo "✅ Backend is up!"
+            exit 0
+          fi
+          sleep 1
+        done
+        echo "❌ Backend server failed to start! Printing logs:"
+        cat backend.log
+        exit 1
+
+    - name: Start Streamlit App Server (Port 8501)
+      run: |
+        # Launch Streamlit app in background (default port 8501)
+        nohup streamlit run app.py > streamlit.log 2>&1 &
+        
+        echo "Waiting for Streamlit server to spin up..."
+        for i in {1..15}; do
+          if nc -z 127.0.0.1 8501; then
+            echo "✅ Streamlit app is up!"
+            exit 0
+          fi
+          sleep 1
+        done
+        echo "❌ Streamlit server failed to start! Printing logs:"
+        cat streamlit.log
+        exit 1
 
     - name: Run test suite
       run: |
-        pytest tests/ -v
+        # Executes all tests inside the tests/ directory
+        pytest -q tests/
