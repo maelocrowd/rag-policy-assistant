@@ -7,6 +7,7 @@ from .utils import (
     LLM_MODEL,
     OPENROUTER_API_KEY,
     SEED,
+    OPENAI_BASE_URL
 )
 
 
@@ -26,7 +27,7 @@ class PolicyRAG:
 
         self.retriever = PolicyRetriever()
         self.client = openai.OpenAI(
-            base_url="https://openrouter.ai/api/v1",
+            base_url=OPENAI_BASE_URL,
             api_key=OPENROUTER_API_KEY,
         )
 

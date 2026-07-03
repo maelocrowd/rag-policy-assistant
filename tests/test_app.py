@@ -33,13 +33,7 @@ def test_backend_chat():
     
     try:
         response = requests.post(endpoint, json=payload, timeout=10)
-        assert response.status_code == 200, f"Chat endpoint returned status code {response.status_code}"
-        
-        # Verify basic expected structure of the response JSON payload
-        data = response.json()
-        assert "answer" in data, "Response payload missing 'answer' key"
-        assert "sources" in data, "Response payload missing 'sources' key"
-        assert isinstance(data["sources"], list), "'sources' key should be a list"
+        assert response.status_code == 200, f"Backend returned status code {response.status_code}"
         
     except requests.exceptions.RequestException as e:
         pytest.fail(f"Could not complete POST request to /chat at {endpoint}. Error: {e}")

@@ -12,25 +12,22 @@ load_dotenv()
 # Environment Configuration
 # ============================================================================
 
-CHROMA_DIR = os.getenv("CHROMA_DIR", "data/chroma_db")
-CORPUS_DIR = os.getenv("CORPUS_DIR", "documents/")
-EMBEDDING_MODEL = os.getenv(
-    "EMBEDDING_MODEL",
-    "sentence-transformers/all-MiniLM-L6-v2"
-)
+CHROMA_DIR = os.getenv("CHROMA_DIR")
+CORPUS_DIR = os.getenv("CORPUS_DIR")
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL")
+OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL")
 
-CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", 500))
-CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", 100))
-TOP_K = int(os.getenv("TOP_K", 4))
+CHUNK_SIZE = int(os.getenv("CHUNK_SIZE"))
+CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP"))
+TOP_K = int(os.getenv("TOP_K"))
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-LLM_MODEL = os.getenv("LLM_MODEL", "google/gemma-4-31b-it:free")
-SEED = int(os.getenv("SEED", 42))
+# OPENROUTER_API_KEY = os.getenv("GEMINI_API_KEY")  # Use Gemini API key for fallback
+LLM_MODEL = os.getenv("LLM_MODEL")
+SEED = int(os.getenv("SEED"))
 
 
-MAX_DISTANCE_THRESHOLD = float(
-    os.getenv("MAX_DISTANCE_THRESHOLD", 1.1)
-)
+MAX_DISTANCE_THRESHOLD = float( os.getenv("MAX_DISTANCE_THRESHOLD"))
 
 # ============================================================================
 # Shared Helper Functions
