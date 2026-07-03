@@ -1,133 +1,198 @@
-# NileTech Policy Assistant (RAG)
+# NileTech Policy Assistant
+
+A Retrieval-Augmented Generation (RAG) application for answering policy-related questions using company documents.
+
+---
 
 ## Overview
 
-The **NileTech Policy Assistant** is a Retrieval-Augmented Generation
-(RAG) application that enables employees to ask natural language
-questions about company policies and receive accurate, context-aware
-answers grounded in indexed policy documents.
+The NileTech Policy Assistant combines semantic search with a Large Language Model to generate grounded answers from indexed policy documents.
+
+The application uses a modular architecture consisting of Streamlit, Flask, ChromaDB, and the Gemma 4 31B Instruct model via OpenRouter. A hybrid chunking strategy and optimized retrieval settings improve retrieval accuracy while providing supporting citations for generated answers.
+
+---
 
 ## Features
 
--   Semantic search over company policy documents
--   Retrieval-Augmented Generation (RAG)
--   Local Chroma vector database
--   Streamlit chat interface
--   Flask REST API
--   Source citations and snippets
--   Evaluation module for retrieval performance
+- Retrieval-Augmented Generation (RAG)
+- Semantic search over policy documents
+- Local ChromaDB vector database
+- Streamlit web interface
+- Flask REST API
+- Automatic source citations
+- Evaluation framework for retrieval performance
+- Support for both Markdown and PDF documents
+
+---
 
 ## Project Structure
 
-``` text
+```text
 rag-policy-assistant/
 │
 ├── api.py
 ├── app.py
-├── requirements.txt
 ├── README.md
+├── design-and-evaluation.md
+├── requirements.txt
+├── eval_dataset.json
+│
 ├── documents/
-├── data/chroma_db/
+├── data/
+│   └── chroma_db/
+│
 ├── src/
 │   ├── evaluation.py
 │   ├── ingestion.py
 │   ├── prompts.py
 │   ├── rag_chain.py
 │   ├── retrieval.py
-│   ├── utils.py
-│   
+│   └── utils.py
+│
 └── tests/
 ```
 
-## Architecture
+---
 
-``` text
-User
- │
- ▼
-Streamlit Frontend
- │
- ▼
-Flask API
- │
- ▼
-PolicyRAG
- ├── PolicyRetriever
- ├── ChromaDB
- └── OpenRouter LLM
+## System Architecture
+
+```text
+             User
+               │
+               ▼
+     Streamlit Frontend
+               │
+               ▼
+          Flask REST API
+               │
+               ▼
+          PolicyRAG Engine
+          ├── Retriever
+          ├── ChromaDB
+          └── Gemma LLM
 ```
+
+---
 
 ## Installation
 
-``` bash
+Python **3.11** is recommended.
+
+```bash
 python -m venv .venv
+```
 
-# Windows
+Activate the environment:
+
+**Windows**
+
+```bash
 .venv\Scripts\activate
+```
 
-# Linux/macOS
+**Linux/macOS**
+
+```bash
 source .venv/bin/activate
+```
 
+Install the dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
+---
+
 ## Configuration
 
-Create a `.env` file:
+Create a `.env` file.
 
-``` text
-OPENROUTER_API_KEY=your_api_key
-LLM_MODEL=your_model_name
+```env
+OPENROUTER_API_KEY=YOUR_API_KEY
+
+LLM_MODEL=google/gemma-4-31b-it
+OPENAI_BASE_URL=https://openrouter.ai/api/v1
+
+EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
+
+BACKEND_URL=http://127.0.0.1:5000
+
+CHROMA_DIR=data/chroma_db
+CORPUS_DIR=documents
+
+CHUNK_SIZE=500
+CHUNK_OVERLAP=100
+
+TOP_K=4
+MAX_DISTANCE_THRESHOLD=1.1
+
+SEED=42
 ```
+
+---
 
 ## Build the Vector Database
 
-``` bash
-python -m src.ingestion.py
+```bash
+python -m src.ingestion
 ```
+
+---
 
 ## Run the Backend
 
-``` bash
+```bash
 python api.py
 ```
 
 Available endpoints:
 
--   `GET /` -- Redirects to the Streamlit interface
--   `POST /chat` -- Returns answers with citations
--   `GET /health` -- Returns API health status
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/health` | Returns API health status |
+| POST | `/chat` | Returns answers with citations |
+
+---
 
 ## Run the Frontend
 
-``` bash
+```bash
 streamlit run app.py
 ```
 
-## Run Evaluation
+---
 
-``` bash
+## Run the Evaluation
+
+```bash
 python -m src.evaluation
 ```
 
-## Example Question
+---
 
-**Question**
+## Technology Stack
 
-> How many annual leave days do employees receive?
+- Python
+- Streamlit
+- Flask
+- ChromaDB
+- Sentence Transformers (all-MiniLM-L6-v2)
+- OpenRouter API
+- Gemma 4 31B free tier
 
-The assistant retrieves relevant policy chunks, generates a grounded
-response, and displays supporting citations and snippets.
+---
 
-## Technologies
+## Testing
 
--   Python
--   Streamlit
--   Flask
--   ChromaDB
--   Sentence Transformers
--   OpenRouter API
+Run the unit tests using:
+
+```bash
+pytest
+```
+
+---
 
 ## License
 
-Developed for an academic Retrieval-Augmented Generation (RAG) project.
+This project was developed for an academic Retrieval-Augmented Generation (RAG) assignment.
