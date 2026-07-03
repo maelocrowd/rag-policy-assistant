@@ -21,6 +21,7 @@ jobs:
       CHUNK_OVERLAP: 100
       TOP_K: 4
       SEED: 42
+      MAX_DISTANCE_THRESHOLD: 1.1
       STREAMLIT_SERVER_HEADLESS: "true"
       HF_HOME: ~/.cache/huggingface
       
