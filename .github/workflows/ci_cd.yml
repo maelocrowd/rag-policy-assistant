@@ -87,7 +87,7 @@ jobs:
         echo "Waiting for Streamlit server to spin up..."
         for i in {1..15}; do
           if nc -z 127.0.0.1 8501; then
-            echo "✅ Streamlit app is up!"
+            echo "✅ Streamlit app is up and running!"
             exit 0
           fi
           sleep 1
